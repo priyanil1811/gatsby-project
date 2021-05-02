@@ -10,6 +10,10 @@ const BlogPostTemplate = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
 
+  const datePublished = new Date(post.frontmatter.date)
+  const dateUpdated = post.frontmatter.updated && new Date(post.frontmatter.updated)
+
+
   return (
     <Layout location={location} title={siteTitle}>
       <Seo
@@ -22,17 +26,17 @@ const BlogPostTemplate = ({ data, location }) => {
         itemType="http://schema.org/Article"
       >
         <header>
+          <img src={post.frontmatter.bannerImg} alt="" className="banner-img" />
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
+          <div>Date published: <time datetime={datePublished.toLocaleDateString('en-CA')}>{datePublished.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })}</time></div>
+          {dateUpdated &&
+            <div>Updated on: <time datetime={dateUpdated.toLocaleDateString('en-CA')}>{dateUpdated.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })}</time></div>
+          }
         </header>
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}
           itemProp="articleBody"
-        />
-        <hr />
-        <footer>
-          <Bio />
-        </footer>
+        />      
       </article>
       <nav className="blog-post-nav">
         <ul
@@ -82,9 +86,11 @@ export const pageQuery = graphql`
       excerpt(pruneLength: 160)
       html
       frontmatter {
-        title
-        date(formatString: "MMMM DD, YYYY")
+        title 
+        date
+        updated
         description
+        bannerImg
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {

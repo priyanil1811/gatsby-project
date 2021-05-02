@@ -55,37 +55,45 @@ const BlogIndex = ({ data, location }) => {
         onChange={handleSearch} 
         value={search.query} />
 
-<div class="row">
+      <ol style={{ listStyle: `none` }}>
         {search.filteredPosts.map(post => {
 
           const title = post.frontmatter.title || post.fields.slug
           const bannerImg = post.frontmatter.bannerImg
 
           return (
-            <div class="card" key={post.fields.slug}>
-              <h2>
-                <Link to={post.fields.slug} itemProp="url">
-                    <span itemProp="headline">{title}</span>
-                </Link>
-              </h2>
-              <small>{post.frontmatter.date}</small>
-              <div class="bannerImg">
-              {bannerImg && 
+            <li key={post.fields.slug}>
+              <article
+                className={`post-list-item ${(bannerImg) ? `post-grid` : ``}`}
+                itemScope
+                itemType="http://schema.org/Article"
+              >
+                {bannerImg && 
                   <Link to={post.fields.slug} itemProp="url">
                     <img src={bannerImg} alt="" className="banner-preview" />
                   </Link>
                 }
-              </div>
-              <p
+                <header>
+                  <h2>
+                    <Link to={post.fields.slug} itemProp="url">
+                      <span itemProp="headline">{title}</span>
+                    </Link>
+                  </h2>
+                  <small>{post.frontmatter.date}</small>
+                </header>
+                <section>
+                  <p
                     dangerouslySetInnerHTML={{
                       __html: post.frontmatter.description || post.excerpt,
                     }}
                     itemProp="description"
                   />
-            </div>
+                </section>
+              </article>
+            </li>
           )
         })}
-      </div>
+      </ol>
       <footer className="result-num">{search.filteredPosts.length} {(search.filteredPosts.length === 1) ? `story` : `stories`} to read</footer>
     </Layout>
   )

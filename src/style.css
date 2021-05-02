@@ -70,13 +70,6 @@
   box-sizing: border-box;
 }
 
-html {
-  line-height: var(--lineHeight-normal);
-  font-size: var(--fontSize-root);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 body {
   font-family: var(--font-body);
   font-size: var(--fontSize-1);
@@ -167,35 +160,6 @@ p {
   padding: var(--spacing-0);
 }
 
-ul,
-ol {
-  margin-left: var(--spacing-0);
-  margin-right: var(--spacing-0);
-  padding: var(--spacing-0);
-  margin-bottom: var(--spacing-8);
-  list-style-position: outside;
-  list-style-image: none;
-}
-
-ul li,
-ol li {
-  padding-left: var(--spacing-0);
-  margin-bottom: calc(var(--spacing-8) / 2);
-}
-
-li > p {
-  margin-bottom: calc(var(--spacing-8) / 2);
-}
-
-li *:last-child {
-  margin-bottom: var(--spacing-0);
-}
-
-li > ul {
-  margin-left: var(--spacing-8);
-  margin-top: calc(var(--spacing-8) / 2);
-}
-
 blockquote {
   color: var(--color-text-light);
   margin-left: calc(-1 * var(--spacing-6));
@@ -209,11 +173,6 @@ blockquote {
 
 blockquote > :last-child {
   margin-bottom: var(--spacing-0);
-}
-
-blockquote > ul,
-blockquote > ol {
-  list-style-position: inside;
 }
 
 table {
@@ -319,15 +278,77 @@ a:focus {
   margin-bottom: var(--spacing-8);
 }
 
-/* Media queries */
 
-@media (max-width: 42rem) {
-  blockquote {
-    padding: var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-4);
-    margin-left: var(--spacing-0);
-  }
-  ul,
-  ol {
-    list-style-position: inside;
-  }
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add a gray background color with some padding */
+body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f1f1f1;
+}
+
+/* Header/Blog Title */
+.header {
+  padding: 30px;
+  font-size: 40px;
+  text-align: center;
+  background: white;
+}
+
+/* Fake image */
+.bannerImg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+  margin: 10px 0px;
+}
+
+/* Add a card effect for articles */
+.card {
+   background-color: white;
+   padding: 20px;
+   margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+img, input[type="search"] {
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111111;
+}
+
+.main-heading {
+  margin-bottom: 20px;
 }
